@@ -4,6 +4,9 @@
 import configparser
 from superhero import SuperHero
 from yandexupload import YaUploader
+from stackoverflowapi import StackOverflow
+from datetime import datetime, timedelta
+
 
 def start_task(func):
     def wrapper():
@@ -42,7 +45,17 @@ def task_2():
     result = uploader.upload("helloworld.txt")
     print(result)
 
+@start_task
+def task_3():
+    python_stack = StackOverflow()
+    set_time = datetime.today() - timedelta(2)
+    result = python_stack.get_questions_of_tag("Python", set_time)
+    if type(result) == list:
+        print(*result)
+    else:
+        print(result)
 
 if __name__ == "__main__":
     task_1()
     task_2()
+    task_3()
