@@ -33,6 +33,7 @@ def task_1():
     key = max(heroes_iq.keys())
     print(f"Умнейший из героев {heroes_iq[key].name}, с интеллектом {heroes_iq[key].intelligence}")
 
+
 @start_task
 def task_2():
     """
@@ -45,15 +46,22 @@ def task_2():
     result = uploader.upload("helloworld.txt")
     print(result)
 
+
 @start_task
 def task_3():
     python_stack = StackOverflow()
-    set_time = datetime.today() - timedelta(2)
-    result = python_stack.get_questions_of_tag("Python", set_time)
-    if type(result) == list:
-        print(*result)
-    else:
-        print(result)
+    # Слишком много!
+    # set_time = datetime.today() - timedelta(2)
+    set_time = datetime.today() - timedelta(1)
+    my_tag = "python"
+    input_temp = input("Результатов может быть много. Точно хотите продолжить? (y/n): ")
+    if input_temp.lower() in ('yes', 'да', 'y', 'д'):
+        result = python_stack.print_questions_of_tag(my_tag, set_time)
+        if type(result) == list:
+            print(f"Получено {len(result)} вопросов по теме {my_tag}")
+        else:
+            print(f"Ошибка! До возникновения ошибки получено {len(result)} вопросов по теме {my_tag}")
+
 
 if __name__ == "__main__":
     task_1()

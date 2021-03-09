@@ -6,14 +6,15 @@ class StackOverflow:
     def __init__(self):
         pass
 
-    def get_questions_of_tag(self, input_tag: str, from_date=""):
+    def print_questions_of_tag(self, input_tag: str, from_date=""):
         url_api = "https://api.stackexchange.com/2.2/questions"
         params = {
             "order": "desc",
-            "sort": "activity",
+            "sort": "creation",
             "tagged": input_tag,
             "site": "stackoverflow",
-            "filter": "!0j_J2CikNeRO"
+            "pagesize": 100,
+            "filter": "!--Fgzp2PZM*u"
         }
         if from_date:
             if type(from_date) == datetime:
@@ -27,9 +28,14 @@ class StackOverflow:
             params["page"] = page
             response = requests.get(url_api, params=params)
             if response.status_code == 200:
-                for item in response.json()["items"]:
+                items = response.json()
+                for item in items["items"]:
+                    print(item["title"])
                     titles.append(item["title"])
             else:
-                return "Ошибка запроса"
+                print("Ошибка запроса:")
+                print(response.status_code)
+                print(response.text)
+                return titles
             if not response.json()["has_more"]:
                 return titles
