@@ -1,5 +1,6 @@
 """Модуль, описывающий класс SuperHero"""
 import requests
+from goodlogger import main_log
 
 class SuperHero:
     """
@@ -7,11 +8,13 @@ class SuperHero:
     """
     START_URL = 'https://superheroapi.com/api/'
 
+    @main_log
     def __init__(self, name, set_api_key=""):
         self.api_key = set_api_key
         self.name = name
         self.intelligence = 0
 
+    @main_log
     def load_iq(self, custom_api_key=""):
         """
         Получить данные об интеллекте с удаленного сервера.

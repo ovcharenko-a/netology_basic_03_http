@@ -6,10 +6,11 @@ from superhero import SuperHero
 from yandexupload import YaUploader
 from stackoverflowapi import StackOverflow
 from datetime import datetime, timedelta
+from goodlogger import main_log, custom_log
 
 
 def start_task(func):
-    def wrapper():
+    def wrapper(*task):
         print(f"СТАРТ ЗАДАЧИ {func.__name__}")
         func()
         print(f"КОНЕЦ ЗАДАЧИ {func.__name__}")
@@ -18,6 +19,7 @@ def start_task(func):
 
 
 @start_task
+@main_log
 def task_1():
     """
     Определим, кто самый умный супергерой
@@ -35,6 +37,7 @@ def task_1():
 
 
 @start_task
+@main_log
 def task_2():
     """
     Загрузка файла на сервер
@@ -48,10 +51,10 @@ def task_2():
 
 
 @start_task
+@custom_log("stack_log\\main.log")
 def task_3():
     python_stack = StackOverflow()
     # Слишком много!
-    # set_time = datetime.today() - timedelta(2)
     set_time = datetime.today() - timedelta(1)
     my_tag = "python"
     input_temp = input("Результатов может быть много. Точно хотите продолжить? (y/n): ")

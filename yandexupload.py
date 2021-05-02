@@ -1,6 +1,8 @@
 """Модуль описывающий класс YaUploader"""
 import requests
 from pathlib import Path
+from goodlogger import main_log
+
 
 class YaUploader:
     """
@@ -17,10 +19,11 @@ class YaUploader:
         507: "Insufficient Storage — для загрузки файла не хватает места на Диске пользователя."
     }
 
+    @main_log
     def __init__(self, token: str):
         self.token = token
 
-
+    @main_log
     def upload(self, input_file_path: str, remote_file_path: str = "", overwrite: bool = True):
         """Метод загруджает файл file_path на яндекс диск"""
         if not remote_file_path:

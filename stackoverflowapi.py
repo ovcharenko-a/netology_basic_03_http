@@ -1,11 +1,13 @@
 import requests
 from datetime import datetime
-
+from goodlogger import custom_log
 
 class StackOverflow:
+    @custom_log("stack_log\\main.log")
     def __init__(self):
         pass
 
+    @custom_log("stack_log\\main.log")
     def print_questions_of_tag(self, input_tag: str, from_date=""):
         url_api = "https://api.stackexchange.com/2.2/questions"
         params = {
