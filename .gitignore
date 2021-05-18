@@ -2,3 +2,4 @@
 token.conf
 /venv/
 /main.log
+/stack_log/main.log
